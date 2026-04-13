@@ -1,9 +1,13 @@
-module Main (
-    main
-  ) where
+module Main (main) where
 
-import Lib (introMessage)
+import System.Environment (getArgs)
+import Tokens (alexScanTokens)
+import Parser (parse)
 
 main :: IO ()
-main =
-  putStrLn introMessage
+main = do
+    [filename] <- getArgs
+    source <- readFile filename
+    let tokens = alexScanTokens source
+    let ast = parse tokens
+    print ast

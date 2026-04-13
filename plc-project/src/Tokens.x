@@ -38,14 +38,14 @@ tokens :-
   "MINUS"                          { \_ -> TokenMinus }
   "GROUP"                          { \_ -> TokenGroup }
   "BY"                             { \_ -> TokenBy }
-  "MAX"                            { \_ -> TokenMax }oken
+  "MAX"                            { \_ -> TokenMax }
   "MIN"                            { \_ -> TokenMin }
   "COUNT"                          { \_ -> TokenCount }
   "SUM"                            { \_ -> TokenSum }
 
   $digit+                          { \s -> TokenInteger (read s) }
   \? $alpha $alnum*                { \s -> TokenVar (tail s) }
-  \< [^\>]+ \>                     { \s -> TokenUri (init (tail s)) }
+  \< [^ \>\<\t\n]+ \>              { \s -> TokenUri (init (tail s)) }                    
   \" [^\"]* \"                     { \s -> TokenString (init (tail s)) }
   $alpha $alnum*                   { \s -> TokenIdent s }
 

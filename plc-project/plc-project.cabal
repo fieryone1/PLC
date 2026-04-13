@@ -25,7 +25,8 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      Parser
+      Tokens
   other-modules:
       Paths_plc_project
   autogen-modules:
