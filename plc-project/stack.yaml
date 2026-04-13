@@ -30,6 +30,10 @@ resolver: lts-21.25
 #   - wai
 packages:
 - .
+
+extra-deps:
+- rdf4h-5.2.2@sha256:b687d51e66a5b2cbda52529529d0aa84bed06901a9df27afcf5a552bc207b6b5,6259
+
 # Dependency packages to be pulled from upstream that are not in the snapshot.
 # These entries can reference officially published versions as well as
 # forks / in-progress versions pinned to a git hash. For example:

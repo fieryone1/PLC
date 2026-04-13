@@ -1,0 +1,7 @@
+@prefix ont: <http://example.org/ont/> .
+
+<http://example.org/alice> ont:name "Alice" .
+<http://example.org/alice> ont:age 30 .
+<http://example.org/alice> ont:worksFor <http://example.org/uos> .
+<http://example.org/bob> ont:name "Bob" .
+<http://example.org/bob> ont:age 25 .
