@@ -1,8 +1,8 @@
 module Eval where
 
 import Parser
-import Rdf 
-import Data.List (nub, sortBy)
+import Rdf
+import Data.List (nub, sortBy,intersect)
 import Data.Set (fromList, toList)
 
 
@@ -28,12 +28,12 @@ execStatements env (x:xs) = do
 
 
 execStatement :: Env -> Statement -> IO (Env, [String])
-execStatement e (Assign name expr) = do 
+execStatement e (Assign name expr) = do
   graph <- evalExpr e expr
   return ((name, graph) : e, [])
-execStatement e (Print name) = 
-  case lookup name e of 
-    Nothing -> error (name ++ "is undefined")
+execStatement e (Print name) =
+  case lookup name e of
+    Nothing -> error (name ++ " is undefined")
     Just gra -> return (e, renderGraph gra)
 
 
@@ -41,16 +41,34 @@ execStatement e (Print name) =
 -- IO done 
 
 evalExpr :: Env -> Expr -> IO Graph
-evalExpr e (Load file ) = loadG file 
+evalExpr e (Load file ) = loadG file
 evalExpr e (Union f1 f2) = return $ unionEval e f1 f2
-evalExpr _ _ = error "undefined"  
+evalExpr e (Intersect f1 f2) = return $ intersectEval e f1 f2
+evalExpr e (Minus f1 f2) = return $ minusEval e f1 f2
+evalExpr _ _ = error "undefined"
 
 unionEval :: Env -> String -> String -> Graph
-unionEval e f1 f2  = 
-  case (lookup f1 e,lookup f2 e) of 
-    (Nothing, _) -> error (f1 ++ "is undefined")
-    (_,Nothing) -> error (f2 ++ "is undefined")
+unionEval e f1 f2  =
+  case (lookup f1 e,lookup f2 e) of
+    (Nothing, _) -> error (f1 ++ " is undefined")
+    (_,Nothing) -> error (f2 ++ " is undefined")
     (Just g1, Just g2) -> nub (g1 ++ g2)
+
+intersectEval :: Env -> String -> String -> Graph
+intersectEval e f1 f2 =
+    case (lookup f1 e,lookup f2 e) of
+    (Nothing, _) -> error (f1 ++ " is undefined")
+    (_,Nothing) -> error (f2 ++ " is undefined")
+    (Just g1, Just g2) -> filter (`elem` g2) g1
+
+
+minusEval :: Env -> String -> String -> Graph
+minusEval e f1 f2 =
+    case (lookup f1 e,lookup f2 e) of
+    (Nothing, _) -> error (f1 ++ " is undefined")
+    (_,Nothing) -> error (f2 ++ " is undefined")
+    (Just g1, Just g2) -> filter (`notElem` g2) g1
+
 
 --  rendering 
 renderGraph :: Graph -> [String]

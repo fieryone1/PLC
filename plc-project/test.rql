@@ -1,2 +1,4 @@
-graph <- LOAD "foo"
-PRINT graph
+graph1 <- LOAD "foo" 
+graph2 <- LOAD "bar" 
+unionGraph <- graph2 MINUS graph1
+PRINT unionGraph
