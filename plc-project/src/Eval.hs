@@ -3,6 +3,7 @@ module Eval where
 import Parser
 import Rdf 
 import Data.List (nub, sortBy)
+import Data.Set (fromList, toList)
 
 
 
@@ -41,9 +42,15 @@ execStatement e (Print name) =
 
 evalExpr :: Env -> Expr -> IO Graph
 evalExpr e (Load file ) = loadG file 
+evalExpr e (Union f1 f2) = return $ unionEval e f1 f2
 evalExpr _ _ = error "undefined"  
 
-
+unionEval :: Env -> String -> String -> Graph
+unionEval e f1 f2  = 
+  case (lookup f1 e,lookup f2 e) of 
+    (Nothing, _) -> error (f1 ++ "is undefined")
+    (_,Nothing) -> error (f2 ++ "is undefined")
+    (Just g1, Just g2) -> nub (g1 ++ g2)
 
 --  rendering 
 renderGraph :: Graph -> [String]

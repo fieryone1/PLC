@@ -1,0 +1,4 @@
+graph1 <- LOAD "foo" 
+graph2 <- LOAD "bar" 
+unionGraph <- graph1 UNION graph2 
+PRINT unionGraph
