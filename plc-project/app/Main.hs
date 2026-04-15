@@ -3,7 +3,10 @@ module Main (main) where
 import System.Environment (getArgs)
 import Tokens (alexScanTokens)
 import Parser (parse)
-import Rdf (load)
+import Eval 
+
+-- import Eval (runProg)
+
 
 -- main :: IO ()  --test parser and lexer
 -- main = do
@@ -13,7 +16,11 @@ import Rdf (load)
 --     let ast = parse tokens
 --     print ast
 
-main :: IO ()  --test turtle parser
+main :: IO ()
 main = do
-    graph <- load "foo"
-    print graph
+    args <- getArgs
+    let filename = head args
+    src  <- readFile filename
+    let tokens = alexScanTokens src
+    let ast    = parse tokens
+    runProg ast

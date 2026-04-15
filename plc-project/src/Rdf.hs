@@ -12,8 +12,8 @@ type RDFTriple = (RDFNode, RDFNode, RDFNode)
 
 type Graph = [RDFTriple]
 
-load :: String -> IO Graph
-load name = do
+loadG :: String -> IO Graph
+loadG name = do
   result <- parseFile (TurtleParser Nothing Nothing) (name ++ ".ttl")
   case (result :: Either ParseFailure (RDF TList)) of
     Left err  -> error (show err)

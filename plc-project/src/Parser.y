@@ -46,22 +46,6 @@ import Tokens
 %left AND
 %right NOT
 
--- %% 
--- Exp : int                                       { TmInt $1 } 
---     | var                                       { TmVar $1 }
---     | true                                      { TmTrue }
---     | false                                     { TmFalse } 
---     | Exp '<' Exp                               { TmCompare $1 $3 } 
---     | Exp '+' Exp                               { TmAdd $1 $3 }
---     | if Exp then Exp else Exp                  { TmIf $2 $4 $6 } 
---     | lam '(' var ':' Type ')' Exp              { TmLambda $3 $5 $7 }
---     | let '(' var ':' Type ')' '=' Exp in Exp   { TmLet $3 $5 $8 $10 }
---     | Exp Exp %prec APP                         { TmApp $1 $2 } 
---     | '(' Exp ')'                               { $2 }
-
--- Type : Bool            { TyBool } 
---      | Int             { TyInt } 
---      | Type arr Type   { TyFun $1 $3 } 
 
 %%
 
@@ -134,6 +118,7 @@ parseError (t:_) = error ("Parse error: unexpected token " ++ show t)
 data Statement = Assign String Expr
                | Print String
                deriving (Show, Eq)
+           
 
 data Expr = Load String
           | Union String String

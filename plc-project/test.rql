@@ -1,3 +1,2 @@
-baz <- LOAD "baz"
-result <- SELECT (?s, <http://example.org/ont/hasAge>, ?age) WHERE MATCH (?s, <http://example.org/ont/hasAge>, ?age) IN baz AND ?age >= 21
-PRINT result
+graph <- LOAD "foo"
+PRINT graph
