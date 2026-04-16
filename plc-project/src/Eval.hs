@@ -13,7 +13,7 @@ type Binding = [(String, RDFNode)]
 runProg :: [Statement] -> IO ()
 runProg = execStatements []
 
-printLines :: [String] -> IO ()
+printLines :: [String] -> IO () 
 printLines []     = return ()
 printLines (x:xs) = do
     putStrLn x
@@ -45,7 +45,45 @@ evalExpr e (Load file ) = loadG file
 evalExpr e (Union f1 f2) = return $ unionEval e f1 f2
 evalExpr e (Intersect f1 f2) = return $ intersectEval e f1 f2
 evalExpr e (Minus f1 f2) = return $ minusEval e f1 f2
+evalExpr e (Select outTerms cond ) = return $ evalSelect e outTerms cond 
 evalExpr _ _ = error "undefined"
+
+
+
+evalSelect :: Env -> [OutputTerm] -> Condition -> Graph
+evalSelect env outTerms cond = 
+  let bindings = evalCond env cond 
+  in nub $ map (buildTriple outTerms) bindings
+
+buildTriple :: [OutputTerm] -> Binding -> RDFTriple
+buildTriple [s, p, o] b = (resolve s, resolve p, resolve o)
+  where
+    resolve (OutVar v) = case lookup v b of
+                           Just n  -> n
+                           Nothing -> error ("Unbound variable: " ++ v)
+    resolve (OutURI u) = URI u
+    resolve (OutStr s) = Str s
+    resolve (OutInt i) = Num i
+buildTriple _ _ = error "SELECT needs exactly 3 output terms"
+
+evalCond :: Env -> Condition -> [Binding]
+evalCond env (Match s p o graph ) =
+  case lookup graph env of 
+    Nothing -> error (graph ++ " is undefined")
+    Just g -> concatMap (matchTriple s p o ) g
+
+matchTriple :: Term->Term->Term -> RDFTriple -> [Binding]
+matchTriple s p o (s', p', o') = case (bindTerm s s', bindTerm p p', bindTerm o o' ) of 
+  (Just b1, Just b2, Just b3) -> [b1 ++ b2 ++ b3]
+  _ -> []
+
+bindTerm :: Term -> RDFNode -> Maybe Binding
+bindTerm (TermVar x) node    = Just [(x, node)]
+bindTerm (TermURI x) (URI y) = if x == y then Just [] else Nothing
+bindTerm (TermStr x) (Str y) = if x == y then Just [] else Nothing
+bindTerm (TermInt x) (Num y) = if x == y then Just [] else Nothing
+bindTerm _ _                 = Nothing
+
 
 unionEval :: Env -> String -> String -> Graph
 unionEval e f1 f2  =
@@ -68,6 +106,8 @@ minusEval e f1 f2 =
     (Nothing, _) -> error (f1 ++ " is undefined")
     (_,Nothing) -> error (f2 ++ " is undefined")
     (Just g1, Just g2) -> filter (`notElem` g2) g1
+
+
 
 
 --  rendering 

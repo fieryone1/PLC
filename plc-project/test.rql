@@ -1,4 +1,3 @@
-graph1 <- LOAD "foo" 
-graph2 <- LOAD "bar" 
-unionGraph <- graph2 MINUS graph1
-PRINT unionGraph
+g <- LOAD "test"
+result <- SELECT(?s, <http://example.org/ont/hasAge>, ?o) WHERE MATCH(?s, <http://example.org/ont/hasAge>, ?o) IN g
+PRINT result
