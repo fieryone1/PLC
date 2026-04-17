@@ -1,0 +1,7 @@
+<http://example.org/alice> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Student> .
+<http://example.org/bob> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Professor> .
+<http://example.org/charlie> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Student> .
+<http://example.org/dave> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Animal> .
+<http://example.org/eve> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Professor> .
+<http://example.org/alice> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Student> .
+<http://example.org/frank> <http://example.org/ont/name> "Frank" .

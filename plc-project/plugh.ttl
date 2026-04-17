@@ -1,0 +1,4 @@
+<http://example.org/Student> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://example.org/Person> .
+<http://example.org/Professor> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://example.org/Person> .
+<http://example.org/Professor> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://example.org/Academic> .
+<http://example.org/Animal> <http://example.org/ont/name> "Animal" .
