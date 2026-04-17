@@ -71,6 +71,59 @@ evalCond env (Match s p o graph ) =
   case lookup graph env of 
     Nothing -> error (graph ++ " is undefined")
     Just g -> concatMap (matchTriple s p o ) g
+evalCond env (And c1 c2 ) =
+  let  b1 = evalCond env c1 
+  in case c2 of
+    Gte _ _  -> filterBindings b1 c2
+    Lte _ _  -> filterBindings b1 c2
+    Gt  _ _  -> filterBindings b1 c2
+    Lt  _ _  -> filterBindings b1 c2
+    Eq  _ _  -> filterBindings b1 c2
+    Neq _ _  -> filterBindings b1 c2
+    _        -> joinBindings b1 (evalCond env c2)
+evalCond env (Or c1 c2) = nub $ evalCond env c1 ++ evalCond env c2
+evalCond env (Not _) = error " Not requires bindings"
+evalCond _ _ = []
+
+filterBindings :: [Binding] -> Condition -> [Binding]
+filterBindings bs (Gte var n) = filter (checkNum var (>=n)) bs 
+filterBindings bs (Lte var n) = filter (checkNum var (<=n)) bs 
+filterBindings bs (Gt var n) = filter (checkNum var (>n)) bs 
+filterBindings bs (Lt var n) = filter (checkNum var (<n)) bs 
+filterBindings bs (Eq var n) = filter (checkEq var n) bs 
+filterBindings bs (Neq var val) = filter (not . checkEq var val) bs 
+filterBindings bs _ = bs 
+
+
+checkNum :: String -> (Int -> Bool) -> Binding -> Bool 
+checkNum var f b = case lookup var b of 
+  Just (Num x) -> f x 
+  _ -> False 
+
+
+checkEq :: String -> Value -> Binding -> Bool
+checkEq var (ValInt n) b = case lookup var b of
+  Just (Num x) -> x == n
+  _ -> False
+checkEq var (ValStr s) b = case lookup var b of
+  Just (Str x) -> x == s
+  _ -> False
+checkEq var (ValURI u) b = case lookup var b of
+  Just (URI x) -> x == u
+  _ -> False
+checkEq var (ValVar v) b = case (lookup var b, lookup v b) of
+  (Just x, Just y) -> x == y
+  _ -> False
+
+
+
+
+joinBindings :: [Binding] -> [Binding] -> [Binding] 
+joinBindings b1 b2 = [b1' ++ b2' | b1' <- b1, b2' <- b2, compatible b1' b2'] where 
+  compatible b1' b2' = all (\(key,value) -> lookup key b1' `elem` [Nothing,Just value]) b2'
+
+
+
 
 matchTriple :: Term->Term->Term -> RDFTriple -> [Binding]
 matchTriple s p o (s', p', o') = case (bindTerm s s', bindTerm p p', bindTerm o o' ) of 

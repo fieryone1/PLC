@@ -1,0 +1,4 @@
+g1 <- LOAD "g1"
+g2 <- LOAD "g2"
+result <- SELECT(?s, <http://example.org/type>, ?z) WHERE MATCH(?s, <http://example.org/type>, ?y) IN g1 AND MATCH(?y, <http://example.org/subClassOf>, ?z) IN g2
+PRINT result

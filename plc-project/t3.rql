@@ -1,0 +1,5 @@
+qux <- LOAD "qux"
+r1 <- SELECT(?s, <http://example.org/ont/studiesAt>, <http://example.org/uos>) WHERE MATCH(?s, <http://example.org/ont/studiesAt>, <http://example.org/uos>) IN qux
+r2 <- SELECT(?s, <http://example.org/ont/worksFor>, <http://example.org/uos>) WHERE MATCH(?s, <http://example.org/ont/worksFor>, <http://example.org/uos>) IN qux
+result <- r1 UNION r2
+PRINT result

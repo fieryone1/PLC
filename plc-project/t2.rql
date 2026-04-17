@@ -1,0 +1,3 @@
+baz <- LOAD "baz"
+result <- SELECT (?s , <http://example.org/ont/hasAge> , ?o) WHERE MATCH (?s , <http://example.org/ont/hasAge> , ?o) IN baz AND ?o >=21
+PRINT result 
