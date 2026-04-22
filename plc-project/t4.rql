@@ -1,0 +1,7 @@
+quux <- LOAD "quux"
+
+result <- SELECT (?x, <http://example.org/ont/price>, MAX(?p))
+          WHERE MATCH(?x, <http://example.org/ont/price>, ?p) IN quux
+          GROUP BY ?x
+
+PRINT result

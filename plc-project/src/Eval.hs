@@ -45,7 +45,8 @@ evalExpr e (Load file ) = loadG file
 evalExpr e (Union f1 f2) = return $ unionEval e f1 f2
 evalExpr e (Intersect f1 f2) = return $ intersectEval e f1 f2
 evalExpr e (Minus f1 f2) = return $ minusEval e f1 f2
-evalExpr e (Select outTerms cond ) = return $ evalSelect e outTerms cond 
+evalExpr e (Select outTerms cond) = return $ evalSelect e outTerms cond
+evalExpr e (SelectGroup outTerms cond groupBy) = return $ evalSelectGroup e outTerms cond groupBy
 evalExpr _ _ = error "undefined"
 
 
@@ -55,15 +56,43 @@ evalSelect env outTerms cond =
   let bindings = evalCond env cond 
   in nub $ map (buildTriple outTerms) bindings
 
+evalSelectGroup :: Env -> [OutputTerm] -> Condition -> GroupByClause -> Graph
+evalSelectGroup env outTerms cond (GroupBy groupVar) =
+  let bindings = evalCond env cond
+      groups   = groupBy' groupVar bindings
+  in nub $ concatMap (buildGroupTriple outTerms) groups
+
+groupBy' :: String -> [Binding] -> [(RDFNode, [Binding])]
+groupBy' var bs =
+  let keys = nub $ concatMap (\b -> case lookup var b of Just v -> [v]; Nothing -> []) bs
+  in [(k, filter (\b -> lookup var b == Just k) bs) | k <- keys]
+
+buildGroupTriple :: [OutputTerm] -> (RDFNode, [Binding]) -> [RDFTriple]
+buildGroupTriple outTerms (key, bs) = [buildTriple outTerms (applyAgg outTerms key bs)]
+
+applyAgg :: [OutputTerm] -> RDFNode -> [Binding] -> Binding
+applyAgg outTerms key bs = concatMap (aggTerm key bs) outTerms
+
+aggTerm :: RDFNode -> [Binding] -> OutputTerm -> Binding
+aggTerm key bs (OutAgg Max var) = [(var, Num $ maximum [n | b <- bs, Just (Num n) <- [lookup var b]])]
+aggTerm key bs (OutAgg Min var) = [(var, Num $ minimum [n | b <- bs, Just (Num n) <- [lookup var b]])]
+aggTerm key bs (OutAgg Count var) = [(var, Num $ length bs)]
+aggTerm key bs (OutAgg Sum var) = [(var, Num $ sum [n | b <- bs, Just (Num n) <- [lookup var b]])]
+aggTerm _ bs (OutVar v) = case lookup v (head bs) of Just val -> [(v, val)]; Nothing -> []
+aggTerm _ _ _ = []
+
 buildTriple :: [OutputTerm] -> Binding -> RDFTriple
 buildTriple [s, p, o] b = (resolve s, resolve p, resolve o)
   where
-    resolve (OutVar v) = case lookup v b of
-                           Just n  -> n
-                           Nothing -> error ("Unbound variable: " ++ v)
-    resolve (OutURI u) = URI u
-    resolve (OutStr s) = Str s
-    resolve (OutInt i) = Num i
+    resolve (OutVar  v)  = case lookup v b of
+                             Just n  -> n
+                             Nothing -> error ("Unbound variable: " ++ v)
+    resolve (OutAgg _ v) = case lookup v b of
+                             Just n  -> n
+                             Nothing -> error ("Unbound variable: " ++ v)
+    resolve (OutURI u)   = URI u
+    resolve (OutStr s')  = Str s'
+    resolve (OutInt i)   = Num i
 buildTriple _ _ = error "SELECT needs exactly 3 output terms"
 
 evalCond :: Env -> Condition -> [Binding]

@@ -1,0 +1,8 @@
+@prefix : <http://example.org/> .
+@prefix ont: <http://example.org/ont/> .
+
+:apple  ont:price "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+:apple  ont:price "7"^^<http://www.w3.org/2001/XMLSchema#integer> .
+:apple  ont:price "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+:banana ont:price "2"^^<http://www.w3.org/2001/XMLSchema#integer> .
+:banana ont:price "9"^^<http://www.w3.org/2001/XMLSchema#integer> .
