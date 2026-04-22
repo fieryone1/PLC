@@ -36,6 +36,12 @@ ghc-options:
 
 library:
   source-dirs: src
+  exposed-modules:
+  - Part2Eval
+  - Eval
+  - Parser
+  - Rdf
+  - Tokens
   verbatim: |
     build-tool-depends:
       alex:alex,
