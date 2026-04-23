@@ -1,0 +1,29 @@
+{
+  "scopeName": "source.rql",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#string" },
+    { "include": "#uri" },
+    { "include": "#integer" },
+    { "include": "#variable" },
+    { "include": "#keyword-control" },
+    { "include": "#keyword-set" },
+    { "include": "#keyword-logical" },
+    { "include": "#aggregate" },
+    { "include": "#assignment" },
+    { "include": "#operator" }
+  ],
+  "repository": {
+    "comment":         { "name": "comment.line.double-dash.rql",       "match": "--.*$" },
+    "string":          { "name": "string.quoted.double.rql",           "match": "\"[^\"]*\"" },
+    "uri":             { "name": "entity.name.type.rql",               "match": "<[^<>\\s]+>" },
+    "integer":         { "name": "constant.numeric.rql",               "match": "\\b[0-9]+\\b" },
+    "variable":        { "name": "variable.other.rql",                 "match": "\\?[a-zA-Z][a-zA-Z0-9_]*" },
+    "keyword-control": { "name": "keyword.control.rql",                "match": "\\b(SELECT|WHERE|MATCH|IN|LOAD|PRINT|GROUP|BY)\\b" },
+    "keyword-set":     { "name": "keyword.operator.set.rql",           "match": "\\b(UNION|INTERSECT|MINUS)\\b" },
+    "keyword-logical": { "name": "keyword.operator.logical.rql",       "match": "\\b(AND|OR|NOT)\\b" },
+    "aggregate":       { "name": "support.function.aggregate.rql",     "match": "\\b(MAX|MIN|COUNT|SUM)\\b" },
+    "assignment":      { "name": "keyword.operator.assignment.rql",    "match": "<-" },
+    "operator":        { "name": "keyword.operator.comparison.rql",    "match": "!=|>=|<=|>|<|=" }
+  }
+}
