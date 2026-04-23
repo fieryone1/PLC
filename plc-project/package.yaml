@@ -1,26 +1,21 @@
 name:       plc-project
 version:    0.1.0.0
-github:     "githubuser/plc-project"
 license:    BSD-3-Clause
-author:     "Author name here"
-maintainer: "example@example.com"
-copyright:  "2026 Author name here"
+author:     "Aidan Oldfield"
+maintainer: "Aidan Oldfield"
+copyright:  "None"
 
 extra-source-files:
 - README.md
 - CHANGELOG.md
 
-# Metadata used when publishing your package:
-# synopsis: Short description of your package
-# category: Web
-
-description: Alex and Happy project.
+description: RDF query language for PLC coursework.
 
 dependencies:
 - base >= 4.7 && < 5
 - array
 - containers
-- rdf4h 
+- rdf4h
 - text
 
 ghc-options:
@@ -38,7 +33,6 @@ library:
   source-dirs: src
   exposed-modules:
   - Part2Eval
-  - Eval
   - Parser
   - Rdf
   - Tokens
@@ -48,7 +42,7 @@ library:
       happy:happy
 
 executables:
-  terrapin:
+  plc-project-exe:
     main:        Main.hs
     source-dirs: app
     ghc-options:
