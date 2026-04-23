@@ -1,3 +1,6 @@
-<http://example.org/bob> <http://example.org/ont/name> "Bob" .
-<http://example.org/charlie> <http://example.org/ont/name> "Charlie" .
-<http://example.org/charlie> <http://example.org/ont/age> "25" .
+@base <http://example.org/> .
+@prefix ont: <http://example.org/ont/> .
+<bob> ont:name "Bob" .
+<bob> ont:worksFor <acme> .
+<dave> ont:age 22 .
+<alice> ont:age 30 .

@@ -6,12 +6,10 @@ cabal-version: 2.2
 
 name:           plc-project
 version:        0.1.0.0
-description:    Alex and Happy project.
-homepage:       https://github.com/githubuser/plc-project#readme
-bug-reports:    https://github.com/githubuser/plc-project/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2026 Author name here
+description:    RDF query language for PLC coursework.
+author:         Aidan Oldfield
+maintainer:     Aidan Oldfield
+copyright:      None
 license:        BSD-3-Clause
 license-file:   LICENSE
 build-type:     Simple
@@ -19,14 +17,9 @@ extra-source-files:
     README.md
     CHANGELOG.md
 
-source-repository head
-  type: git
-  location: https://github.com/githubuser/plc-project
-
 library
   exposed-modules:
       Part2Eval
-      Eval
       Parser
       Rdf
       Tokens

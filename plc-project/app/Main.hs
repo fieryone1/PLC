@@ -5,16 +5,6 @@ import Tokens (alexScanTokens)
 import Parser (parse)
 import Part2Eval (runProg)
 
--- import Eval (runProg)
-
-
--- main :: IO ()  --test parser and lexer
--- main = do
---     [filename] <- getArgs
---     source <- readFile filename
---     let tokens = alexScanTokens source
---     let ast = parse tokens
---     print ast
 
 main :: IO ()
 main = do

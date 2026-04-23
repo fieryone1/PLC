@@ -1,3 +1,4 @@
 <http://example.org/alice> <http://example.org/ont/name> "Alice" .
-<http://example.org/alice> <http://example.org/ont/age> "30" .
+<http://example.org/alice> <http://example.org/ont/age> 30 .
 <http://example.org/bob> <http://example.org/ont/name> "Bob" .
+<http://example.org/carol> <http://example.org/ont/knows> <http://example.org/alice> .
