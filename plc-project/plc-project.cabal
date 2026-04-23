@@ -48,7 +48,7 @@ library
     alex:alex,
     happy:happy
 
-executable plc-project-exe
+executable terrapin
   main-is: Main.hs
   other-modules:
       Paths_plc_project

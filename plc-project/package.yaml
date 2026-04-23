@@ -48,7 +48,7 @@ library:
       happy:happy
 
 executables:
-  plc-project-exe:
+  terrapin:
     main:        Main.hs
     source-dirs: app
     ghc-options:
