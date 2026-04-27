@@ -58,22 +58,3 @@ executable plc-project-exe
     , rdf4h
     , text
   default-language: Haskell2010
-
-test-suite plc-project-test
-  type: exitcode-stdio-1.0
-  main-is: Spec.hs
-  other-modules:
-      Paths_plc_project
-  autogen-modules:
-      Paths_plc_project
-  hs-source-dirs:
-      test
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      array
-    , base >=4.7 && <5
-    , containers
-    , plc-project
-    , rdf4h
-    , text
-  default-language: Haskell2010

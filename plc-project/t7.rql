@@ -1,0 +1,28 @@
+foo <- LOAD "foo"
+jane <- SELECT(<http://example.org/jane>, ?p, ?o)
+        WHERE MATCH(<http://example.org/jane>, ?p, ?o) IN foo
+
+hasname<- SELECT(?s, <http://ont.example.org/hasName>, ?o) 
+WHERE MATCH(?s, <http://ont.example.org/hasName>, ?o) IN foo 
+
+
+fredORsally <- SELECT(?s, ?p, ?o)
+          WHERE MATCH(?s, ?p, ?o) IN foo AND ?o = "Fred"
+             OR MATCH(?s, ?p, ?o) IN foo AND ?o = "Sally"
+
+
+
+
+jane1 <- jane MINUS hasname 
+jane2 <- jane1 MINUS fredORsally 
+
+hasname1 <- hasname MINUS jane 
+hasname2 <- hasname1 MINUS fredORsally
+
+fredORsally1 <- fredORsally MINUS jane 
+fredORsally2 <- fredORsally1 MINUS hasname
+
+almostresult <- jane2 UNION hasname2
+result <- almostresult UNION fredORsally2
+
+PRINT result

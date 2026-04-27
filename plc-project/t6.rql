@@ -1,0 +1,6 @@
+foo <- LOAD "foo" 
+bar <- LOAD "bar"
+baz <- LOAD "baz"
+union <- foo UNION bar
+result <- union MINUS baz 
+PRINT result
