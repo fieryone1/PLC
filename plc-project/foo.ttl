@@ -1,10 +1,15 @@
-<http://example.org/jane> <http://ont.example.org/hasName> "Jane" .
-<http://example.org/jane> <http://example.org/likes> <http://example.org/cats> .
-<http://example.org/bob> <http://ont.example.org/hasName> "Bob" .
-<http://example.org/bob> <http://example.org/likes> "Fred" .
-<http://example.org/jane> <http://ont.example.org/hasName> "Fred" .
-<http://example.org/mary> <http://example.org/likes> "Sally" .
-<http://example.org/jane> <http://example.org/likes> "Fred" .
-<http://example.org/bob> <http://ont.example.org/hasName> "Sally" .
-<http://example.org/alice> <http://example.org/age> 30 .
-<http://example.org/jane> <http://example.org/age> 25 .
+<http://example.org/alice> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<http://example.org/alice> <http://xmlns.com/foaf/0.1/knows> <http://example.org/nmg> .
+
+<http://example.org/bob> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<http://example.org/bob> <http://xmlns.com/foaf/0.1/knows> <http://example.org/alice> .
+
+<http://example.org/carol> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+
+<http://example.org/dave> <http://xmlns.com/foaf/0.1/knows> <http://example.org/nmg> .
+
+<http://example.org/eve> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<http://example.org/eve> <http://xmlns.com/foaf/0.1/knows> <http://example.org/nmg> .
+<http://example.org/eve> <http://xmlns.com/foaf/0.1/knows> <http://example.org/alice> .
+
+<http://example.org/frank> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Document> .
