@@ -1,0 +1,10 @@
+foo <- LOAD "foo"
+
+dc10 <- SELECT(?x, <http://purl.org/dc/terms/creator>, ?y)
+        WHERE MATCH(?x, <http://purl.org/dc/elements/1.0/creator>, ?y) IN foo
+
+dc11 <- SELECT(?x, <http://purl.org/dc/terms/creator>, ?y)
+        WHERE MATCH(?x, <http://purl.org/dc/elements/1.1/creator>, ?y) IN foo
+
+result <- dc10 UNION dc11
+PRINT result

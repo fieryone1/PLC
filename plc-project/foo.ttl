@@ -1,15 +1,6 @@
-<http://example.org/alice> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
-<http://example.org/alice> <http://xmlns.com/foaf/0.1/knows> <http://example.org/nmg> .
-
-<http://example.org/bob> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
-<http://example.org/bob> <http://xmlns.com/foaf/0.1/knows> <http://example.org/alice> .
-
-<http://example.org/carol> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
-
-<http://example.org/dave> <http://xmlns.com/foaf/0.1/knows> <http://example.org/nmg> .
-
-<http://example.org/eve> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
-<http://example.org/eve> <http://xmlns.com/foaf/0.1/knows> <http://example.org/nmg> .
-<http://example.org/eve> <http://xmlns.com/foaf/0.1/knows> <http://example.org/alice> .
-
-<http://example.org/frank> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Document> .
+<http://example.org/doc1> <http://purl.org/dc/elements/1.0/creator> <http://example.org/alice> .
+<http://example.org/doc2> <http://purl.org/dc/elements/1.1/creator> <http://example.org/bob> .
+<http://example.org/doc3> <http://purl.org/dc/elements/1.0/creator> <http://example.org/carol> .
+<http://example.org/doc3> <http://purl.org/dc/elements/1.1/creator> <http://example.org/carol> .
+<http://example.org/doc4> <http://purl.org/dc/terms/creator> <http://example.org/dave> .
+<http://example.org/doc5> <http://example.org/ont/title> "A Book" .
