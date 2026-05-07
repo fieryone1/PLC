@@ -1,0 +1,3 @@
+<http://example.org/bob> <http://ont.example.org/hasName> "Bobby" .
+<http://example.org/carol> <http://example.org/ont/title> "Fred" .
+<http://example.org/jane> <http://example.org/ont/worksFor> <http://example.org/acme> .

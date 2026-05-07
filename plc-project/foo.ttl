@@ -4,3 +4,27 @@
 <http://example.org/doc3> <http://purl.org/dc/elements/1.1/creator> <http://example.org/carol> .
 <http://example.org/doc4> <http://purl.org/dc/terms/creator> <http://example.org/dave> .
 <http://example.org/doc5> <http://example.org/ont/title> "A Book" .
+
+# Triples for Task 7 (pattern matching)
+<http://example.org/jane> <http://example.org/ont/worksFor> <http://example.org/acme> .
+<http://example.org/bob> <http://ont.example.org/hasName> "Bobby" .
+<http://example.org/carol> <http://example.org/ont/title> "Fred" .
+<http://example.org/jane> <http://ont.example.org/hasName> "Jane" .
+<http://example.org/other> <http://ont.example.org/hasName> "Fred" .
+<http://example.org/jane> <http://example.org/ont/title> "Sally" .
+
+# Triples for Task 8 (foaf Person / knows)
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+<http://example.org/p1> rdf:type <http://xmlns.com/foaf/0.1/Person> .
+<http://example.org/p1> <http://xmlns.com/foaf/0.1/knows> <http://example.org/nmg> .
+<http://example.org/p2> rdf:type <http://xmlns.com/foaf/0.1/Person> .
+<http://example.org/p3> rdf:type <http://xmlns.com/foaf/0.1/Person> .
+<http://example.org/p3> <http://xmlns.com/foaf/0.1/knows> <http://example.org/otherPerson> .
+
+# Triples for Task 9 (owl:sameAs equivalences)
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+<http://example.org/a> <http://www.w3.org/2002/07/owl#sameAs> <http://example.org/b> .
+<http://example.org/c> <http://www.w3.org/2002/07/owl#sameAs> <http://example.org/b> .
+<http://example.org/d> <http://www.w3.org/2002/07/owl#sameAs> <http://example.org/e> .
+<http://example.org/e> <http://www.w3.org/2002/07/owl#sameAs> <http://example.org/f> .
