@@ -1,6 +1,6 @@
 # RDF Query Language
 
-An interpreter for **RQL**, a small query language for RDF graphs, written in Haskell for the Programming Language Concepts coursework. The lexer is built with [Alex](https://haskell-alex.readthedocs.io/), the parser with [Happy](https://haskell-happy.readthedocs.io/), and Turtle files are read with [rdf4h](https://hackage.haskell.org/package/rdf4h).
+An interpreter for **RQL**, a small query language for RDF graphs, written in Haskell. The lexer is built with [Alex](https://haskell-alex.readthedocs.io/), the parser with [Happy](https://haskell-happy.readthedocs.io/), and Turtle files are read with [rdf4h](https://hackage.haskell.org/package/rdf4h).
 
 An RQL program loads one or more Turtle (`.ttl`) files, combines and queries them, and prints the result as canonical N-Triples.
 
@@ -165,6 +165,3 @@ code --install-extension rql-vscode/rql-0.1.0.vsix
 
 `report.pdf` explains the design decisions, grammar, built-in operations, extensions and testing approach in detail.
 
-## License
-
-BSD-3-Clause, per `plc-project/package.yaml`. The `plc-project/LICENSE` file still contains template placeholder text ("Author name here"). Update it with your name before publishing.
