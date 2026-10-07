@@ -1,4 +1,4 @@
-# PLC: RQL, an RDF Query Language
+# RDF Query Language
 
 An interpreter for **RQL**, a small query language for RDF graphs, written in Haskell for the Programming Language Concepts coursework. The lexer is built with [Alex](https://haskell-alex.readthedocs.io/), the parser with [Happy](https://haskell-happy.readthedocs.io/), and Turtle files are read with [rdf4h](https://hackage.haskell.org/package/rdf4h).
 
